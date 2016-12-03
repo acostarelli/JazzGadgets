@@ -1,4 +1,4 @@
-#Loop
+#Speed
 
 This userscript changes the playback speed of the audio/video. The user specifies the speed on a continous scale.
 

@@ -3,8 +3,6 @@ A collection of userscripts for Youtube that are to help in accompanying jazz mu
 
 Note: these can be used for other styles of music, but they were created with the intent of helping jazz musicians.
 
-<hr>
-
 ## Gadgets
 
 Here's the gadgets and and a brief description of what they do:
@@ -43,3 +41,9 @@ Here's the gadgets and and a brief description of what they do:
     </tr>
   </tbody>
 </table>
+
+## Using
+
+[New to userscripts?](https://github.com/OpenUserJs/OpenUserJS.org/wiki/Userscript-beginners-HOWTO)
+
+Once you have the userscript platform for your browser installed, you can use the download links found on each gadget's README.md file to install the userscript.

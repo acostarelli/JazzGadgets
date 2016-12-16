@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JazzGadget - Loop
 // @namespace    https://github.com/SirPython/JazzGadgets/tree/master/loop
-// @version      0.1
+// @version      0.2
 // @description  Loops a time-segment.
 // @author       SirPython
 // @match        *://www.youtube.com/watch?v=*
@@ -9,6 +9,8 @@
 // ==/UserScript==
 /* jshint -W097 */
 'use strict';
+
+// IF YOU CHANGE THE TIME, THE CANCEL BUTTON BECOMES STUPID.
 
 const [alert, prompt] = [window.alert, window.prompt];
 
@@ -22,7 +24,7 @@ const makePanelButton = (onclick) => {
     const button = document.createElement("button");
     button.className = "ytp-button";
     button.onclick = onclick;
-    button.innerHTML = "JazzGadget\nLoop";
+    button.innerHTML = "JG-Loop";
     return button;
 };
 
@@ -85,6 +87,7 @@ const timeToSeconds = (hhmmss) => {
         
         video = video || document.getElementsByClassName("html5-main-video")[0];
         video.currentTime = start;
+        clearInterval(interval);
         interval = setInterval(() => video.currentTime >= end+1 ? video.currentTime = start : null, 1);
         
     }));

@@ -19,12 +19,12 @@ const makePanelButton = (onclick) => {
 (function() {
     'use strict';
 
-	let video, rate;
+    let video, rate;
     document.getElementsByClassName("ytp-right-controls")[0].appendChild(makePanelButton(() => {
-		
-		rate = parseInt(prompt("Enter the playback speed you want.\n\nNote that for anything below 50%, the audio will cut.", "100%"), 10) / 100;
-		video = video || document.getElementsByClassName("html5-main-video")[0];
-		video.playbackRate = rate;
-		
-	}));
+        
+        rate = parseInt(prompt("Enter the playback speed you want.\n\nNote that for anything below 50%, the audio will cut.", `${rate*100}%`), 10) / 100;
+        video = video || document.getElementsByClassName("html5-main-video")[0];
+        video.playbackRate = rate;
+        
+    }));
 })();

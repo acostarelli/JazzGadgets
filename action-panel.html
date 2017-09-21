@@ -11,7 +11,7 @@
                 <input type="button" value="End">
                 <input type="button" value="Clear">-->
             <input type="text" name="times">
-            <input type="button" onclick="loop(this.parentElement)">
+            <input type="button" onclick="setLoop(this.parentElement)">
         </form>
     </div>
     <hr />
@@ -20,7 +20,7 @@
         Speed:
         <form>
             <input type="number" name="speed" value="100">%
-            <input type="button" onclick="speed(this.parentElement)">
+            <input type="button" onclick="setSpeed(this.parentElement)">
         </form>
     </div>
     <hr />
@@ -34,7 +34,7 @@
         Volume:
         <form>
             <input type="number" name="volume" value="100">%
-            <input type="button" onclick="volume(this.parentElement)">
+            <input type="button" onclick="setVolume(this.parentElement)">
         </form>
     </div>
 </div>

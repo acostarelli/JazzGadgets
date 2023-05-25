@@ -8,29 +8,17 @@
 // ==/UserScript==
 
 (function() {
-    class Enum {
-        constructor(...args) {
-            for(const arg of args) {
-                this[arg] = Symbol(arg);
-            }
-        }
-    }
-
     const video = document.getElementsByClassName("html5-main-video")[0];
     let start = 0;
-    let rate = 0;
+    const comments = [];
+    let now = 0;
+    let choice = 0;
 
-    let paused = false;
-    let vol = null;
-    let now = null;
-
-    const RecordingState = new Enum("NOT_RECORDING", "RECORDING", "PLAYBACK");
-    const recState = RecordingState.NOT_RECORDING;
-    const rec = null;
-    const audio = null;
-    const playbackInt = null;
-
-    document.onkeyup = ({key}) => {
+    document.onkeyup = (e) => {
+        if(e.ctrlKey) {
+            return;
+        }
+        const key = e.key;
         switch(key) {
             case 'u':
                 start = video.currentTime;
@@ -39,20 +27,6 @@
             case 'o':
                 video.currentTime = start;
                 break;
-
-            case 'n':
-                if(!paused) {
-                    now = video.currentTime;
-                    vol = video.volume;
-                    video.volume = 0
-                    paused = true
-                } else {
-                    video.currentTime = now;
-                    video.volume = vol;
-                    paused = false;
-                }
-                break;
-
             case '0':
                 video.playbackRate = 1;
                 break;
@@ -68,46 +42,6 @@
             case '9':
                 video.playbackRate = (+key) / 10;
                 break;
-
-            case 'r':
-                switch(recState) {
-                    case RecordingState.NOT_RECORDING:
-                        navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-                            rec = new MediaRecorder(stream);
-                            const chunks = [];
-
-                            rec.start();
-                            rec.addEventListener("dataavailable", e => chunks.push(e.data));
-                            rec.addEventListener("stop", _ => {
-                                audio = new Audio(
-                                    URL.createObjectURL(
-                                        new Blob(chunks)
-                                    )
-                                )
-                            });
-                        });
-                        break;
-                    case RecordingState.RECORDING: {
-                        rec.stop();
-
-                        const recTime = video.currentTime;
-                        video.currentTime = start;
-
-                        const playback = () => {
-                            while(video.currentTime < recTime);
-
-                            audio.play()
-
-                            playbackInt = setTimeout(playback, 0);
-                        }
-
-                        playbackInt = setTimeout(playback, 0);
-                        break;
-                    }
-                    case RecordingState.PLAYBACK:
-                        break;
-                }
-
         }
     }
 })();
